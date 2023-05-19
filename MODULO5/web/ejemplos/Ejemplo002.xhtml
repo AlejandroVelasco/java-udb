@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../plantilla/plantilla.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="content">
+        <h2>Eventos KEYUP Y BLUR</h2>
+        <h:form id="formulario">
+            <p:panel header="Eventos ajax con Primefaces">
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Evento Key"/>
+                    <p:inputText value="#{personaControl.persona.nombres}">
+                        <p:ajax event="keyup" update="etiquetaNombre"/>
+                    </p:inputText>
+                    <h:outputText id="etiquetaNombre" value="#{personaControl.persona.nombres}"/>
+
+                    <h:outputLabel value="Evento Blur"/>
+                    <p:inputText value="#{personaControl.persona.apellidos}">
+                        <p:ajax event="blur" update="etiquetaApellidos"/>
+                    </p:inputText>
+                    <h:outputText id="etiquetaApellidos" value="#{personaControl.persona.apellidos}"/>
+                </h:panelGrid>                    
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+
+</ui:composition>

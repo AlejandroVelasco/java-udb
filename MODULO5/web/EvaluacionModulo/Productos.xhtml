@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../plantilla/plantilla.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        
+        <h:form>
+            <p:panel header="Datatable">
+            <p:panelGrid columns="2">
+                <h:form id="formulario">
+                    
+                    <center>
+                    <p:panelGrid columns="5" id="panelGridFRM" style="padding:20px;margin-bottom:10px;margin-top:10px">
+                        <p:outputLabel value="Codigo" for="codigo"/>
+                        <p:inputText id="codigo" value="#{productoControl.producto.codigo}" 
+                                     required="true" requiredMessage="Ingrese codigo"/>
+          
+                         <p:outputLabel value="Nombre" for="nombre"/>
+                        <p:inputText id="nombre" value="#{productoControl.producto.nombre}" 
+                                     required="true" requiredMessage="Ingrese Nombre"/>
+         
+                        <p:commandButton  value="Ingresar" action="#{productoControl.guardarProducto()}" update="formulario:tblProds, formulario:panelGridFRM"/>
+                    </p:panelGrid>
+                    </center>
+                    
+                    <p:dataTable id="tblProds" value="#{productoControl.lstProductos}" var="producto" rows="10"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+                                 rowsPerPageTemplate="2,5,10"
+                                 paginatorPosition="bottom" draggableColumns="true">                   
+                        <f:facet name="header">
+                            <div style="text-align: right">
+                                Atributo de persona
+                                <div>
+                                    <p:commandButton id="toggler" type="button" icon="ui-icon-grip-solid-horizontal" value="Columnas"/>
+                                    <p:columnToggler datasource="tblProds" trigger="toggler"/>
+                                </div>
+                            </div>
+                        </f:facet>
+                        
+                        <p:column headerText="ID">
+                            <h:outputText value="#{producto.codigo}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{producto.nombre}" />
+                        </p:column>
+                        
+                        <p:column exportable="false">
+                            <p:commandButton icon="ui-icon-document" value="Modificar">
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-warning" value="Borrar" icon="ui-icon-trash">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panelGrid>
+        </p:panel>
+        
+        </h:form>
+    </ui:define>
+
+</ui:composition>

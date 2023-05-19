@@ -1,0 +1,13 @@
+1. 
+La respuesta es E. Ya que al hacer el insert del primer registro (1, JAVA WEB, 1), para el segundo registro
+procede a setear nuevamente solo el id y la edicion, por lo que el String del titulo continua siendo 'JAVA WEB'.
+Teniendo entonces:
+
+(1, Java Web, 1)
+(2, Java Web, 2)
+
+Posteriormente en el update, actualiza el id 1 con nombre: Java JDBC y tras esto setea nuevamente el id del segundo registro,
+quedando:
+
+(1, Java JDBC, 1)
+(2, Java JDBC, 2)

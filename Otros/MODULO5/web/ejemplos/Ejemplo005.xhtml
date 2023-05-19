@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../plantilla/plantilla.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="content">
+        <h:form>
+            <p:panel header="Listas desplegables" footer="Primefaces">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Lista desplegable básica" />
+                    <p:selectOneMenu id="nombres" value="#{personaControl.persona.nombres}">
+                        <f:selectItem itemLabel="Seleccione" itemValue=""/>
+                        <f:selectItem itemLabel="Juan" itemValue="Juan Antonio"/>
+                        <f:selectItem itemLabel="Carla María" itemValue="Carla María"/>
+                        <f:selectItem itemLabel="Pedro Paramo" itemValue="Pedro Paramo"/>
+                    </p:selectOneMenu> 
+
+
+                    <p:outputLabel value="Personas:"/>
+                    <p:selectOneMenu id="personas" value="#{personaControl.persona}" var="p"
+                                     converter="entityConverter" filter="true" filterMatchMode="contains"
+                                     placeholder="SELECCIONE">
+                        <f:selectItems value="#{personaControl.lstPersona}" var="per" 
+                                       itemLabel="#{per.nombres}  #{per.apellidos}" itemValue="#{per}"/>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombres"/>
+                            </f:facet>
+                            <h:outputText value="#{p.nombres}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Apellidos"/>
+                            </f:facet>
+                            <h:outputText value="#{p.apellidos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dui"/>
+                            </f:facet>
+                            <h:outputText value="#{p.dui}"/>
+                        </p:column>
+                    </p:selectOneMenu>
+                </p:panelGrid>                
+            </p:panel>
+        </h:form>
+    </ui:define>  
+</ui:composition>

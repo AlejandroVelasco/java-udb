@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../Plantillas/plantilla.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        
+        <h:form id="formulario">
+            <p:growl id="msgs" showDetail="true"/>
+            <p:panel header="Mascaras y calendario" footer="Primefaces" toggleable="true">
+                <p:outputLabel value="Fecha de nacimiento" for="fechaNac"/>
+                <p:calendar id="fechaNac" pattern="dd/mm/yyyy" mindate="01/01/1930" effect="shake" maxdate="26/06/2021" navigator="true" showOn="button" value="#{personaControl.persona.fechaNacimiento}">
+                    <p:ajax event="dateSelect" listener="#{personaControl.onDateSelect}" update="msgs"/>
+                </p:calendar>
+            
+                <p:outputLabel value="Telefono"/>
+                <p:inputMask value="#{personaControl.persona.telefono}" mask="(999)-9999-9999"/>
+                             
+                
+                <p:outputLabel value="Dui"/>
+                <p:inputMask required="true" requiredMessage="Ingrese DUI" value="#{personaControl.persona.telefono}" mask="99999999-9"/>
+                
+                <p:commandButton value="Enviar" update="dlg" oncomplete="PF('wdlg').show()"/>  
+               <!-- <p:commandButton value="Enviar" action="#{personaControl.onDateSelect()}"/>-->
+                
+            </p:panel> 
+            
+            <p:dialog modal="true" widgetVar="wdlg" id="dlg" header="Datos enviados">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Fecha de nacimiento:"/>
+                    <p:outputLabel value="#{personaControl.persona.fechaNacimiento}"/>
+                    
+                    <p:outputLabel value="Telefono"/>
+                    <p:outputLabel value="#{personaControl.persona.telefono}"/>
+                    
+                    <p:outputLabel value="DUI"/>
+                    <p:outputLabel value="#{personaControl.persona.dui}"/>
+                    
+                </h:panelGrid>
+                
+            </p:dialog>
+            
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>
